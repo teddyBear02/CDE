@@ -1,3 +1,5 @@
+import Project from "./Project";
+
 let MainApp = () => {
   return (
     <>
@@ -20,6 +22,10 @@ let MainApp = () => {
             </form>
           </div>
         </nav>
+
+        <div id="renderPj">
+          <Project />
+        </div>
       </div>
     </>
   );
