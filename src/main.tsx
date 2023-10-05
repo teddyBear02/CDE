@@ -7,10 +7,10 @@ import GlobalStyle from "./scss/GlobalStyle.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Router>
-      <GlobalStyle>
+    <GlobalStyle>
+      <Router>
         <App />
-      </GlobalStyle>
-    </Router>
+      </Router>
+    </GlobalStyle>
   </React.StrictMode>
 );

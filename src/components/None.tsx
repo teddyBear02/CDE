@@ -1,4 +1,4 @@
-let NoneProject = () => {
+let None = () => {
   return (
     <>
       <div id="project">
@@ -13,4 +13,4 @@ let NoneProject = () => {
   );
 };
 
-export default NoneProject;
+export default None;
