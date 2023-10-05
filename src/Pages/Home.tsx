@@ -1,12 +1,17 @@
-import LeftNav from "../components/LeftNav";
+// import LeftNav from "../components/LeftNav";
 import Nav from "../components/Nav";
+import SubNav from "../components/SubNab";
+import ModalCreate from "../components/ModalCreate";
 let MainApp = () => {
   return (
     <>
       <div id="main">
         <Nav />
-        <LeftNav />
+        <div id="toRender" className="container">
+          <SubNav />
+        </div>
       </div>
+      <ModalCreate />
     </>
   );
 };

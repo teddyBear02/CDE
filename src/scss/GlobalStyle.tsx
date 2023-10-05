@@ -1,5 +1,5 @@
 import "./_Login.scss";
-import "./_Main.scss";
+import "./_Home.scss";
 
 interface Props {
   children: any;
