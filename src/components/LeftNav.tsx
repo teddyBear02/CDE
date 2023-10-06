@@ -1,20 +1,20 @@
 let LeftNav = () => {
   return (
     <>
-      <ul className="nav flex-column">
+      <ul className="nav flex-column" id="leftNav">
         <li className="nav-item">
           <a className="nav-link active" aria-current="page" href="#">
-            Active
+            Files
           </a>
         </li>
         <li className="nav-item">
           <a className="nav-link" href="#">
-            Link
+            Hoạt động
           </a>
         </li>
         <li className="nav-item">
           <a className="nav-link" href="#">
-            Link
+            Việc cần làm
           </a>
         </li>
       </ul>

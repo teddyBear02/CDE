@@ -12,7 +12,6 @@ let SubNav = () => {
       <nav className="navbar navbar-expand-lg bg-body-tertiary" id="subNav">
         <div className="container-fluid ">
           <span className="navbar-brand">Dự án</span>
-
           <span className="navbar-text">
             <Button tiltle="New" />
           </span>
