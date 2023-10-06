@@ -17,6 +17,9 @@ let Nav = () => {
               Search
             </button>
           </form>
+          <div className="d-flex flex-row-reverse">
+            <i className="bi bi-person" id="userIcon"></i>
+          </div>
         </div>
       </nav>
     </>

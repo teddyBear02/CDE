@@ -6,9 +6,9 @@ import { Route, Routes, Link } from "react-router-dom";
 function App() {
   return (
     <>
-      {/* <Home />
-       */}
-      <Project />
+      <Home />
+
+      {/* <Project /> */}
     </>
   );
 }
