@@ -4,7 +4,7 @@ let Nav = () => {
       <nav id="myNav" className="navbar bg-body-tertiary">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
-            Navbar
+            CDE - Quản lý dự án
           </a>
           <form className="d-flex" role="search">
             <input

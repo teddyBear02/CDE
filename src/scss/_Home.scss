@@ -2,6 +2,7 @@
 #main{
     background-color: #f3f3f7;
     height: 100vh;
+    position: relative;
 }
 
 #myNav{
@@ -19,3 +20,78 @@
 #toRender{
     margin-top: 48px;   
 }
+
+.hoverList{
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+// Modal Create Project
+#cr-pj{
+    width: 100%;
+    height: 100%;
+    // position: absolute;
+    // transform: translate(50%, -40%);
+    // right: 50%;
+    // background-color: rgba($color: #000000, $alpha: 0.5);
+    &::after,&::before{
+        clear: both;
+        display: table;
+        content: "";
+    }
+    #boxModal{
+        height: 100%;
+        border-radius: 4px;
+        background-color: #fff;
+        width: 450px;
+        height: 600px;
+        // transform: translate(50%, 10%);
+        // right: 50%;
+        position: absolute;
+
+        #titleModal{
+            h2{
+                text-align: center;
+                margin: 12px 0;
+            }
+        }
+
+        #des{
+            padding-left:24px ;
+        }
+
+        #detail{
+            overflow-y:scroll;
+            margin: 16px 24px ;
+            border-bottom: 1px solid #ccc;
+            height: 65%;
+            input{
+                padding: 8px ;
+                margin: 8px 0;
+            }
+        }
+        
+        #modalBtn{
+            div{
+                position: absolute;
+                right: 0;
+                padding: 0 24px;
+                .btns{
+                    padding: 10px 20px;
+                    border: none;
+                    background-color: #79beff;
+                    border-radius: 4px;
+                    &:hover{
+                        opacity: 0.8;
+                        cursor: pointer;
+                    }
+                }
+                #cancel{
+                    margin-right: 12px;
+                }
+            }
+        }
+    }
+}
+

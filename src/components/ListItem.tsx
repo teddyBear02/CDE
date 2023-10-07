@@ -1,7 +1,7 @@
 let ListItem = () => {
   return (
     <>
-      <table className="table">
+      <table className="table table-hover">
         <thead>
           <tr>
             <th scope="col"></th>
@@ -11,27 +11,13 @@ let ListItem = () => {
             <th scope="col">Modifile on</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
+        <tbody className="table-group-divider">
+          <tr className="hoverList">
             <th scope="row">1</th>
             <td>Mark</td>
             <td>Otto</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td></td>
+            <td>10/7/2023</td>
+            <td>10/3/2023</td>
           </tr>
         </tbody>
       </table>
