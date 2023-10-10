@@ -1,6 +1,6 @@
 interface Props {
   tiltle: string;
-  myEvent: any;
+  myEvent?: any;
 }
 
 let Button = ({ tiltle, myEvent }: Props) => {

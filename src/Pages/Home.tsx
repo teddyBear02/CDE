@@ -25,8 +25,8 @@ let MainApp = () => {
           </nav>
           <ListItem />
         </div>
-        {showModal && <ModalCreate />}
       </div>
+      {showModal && <ModalCreate />}
     </>
   );
 };

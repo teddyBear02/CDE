@@ -4,7 +4,7 @@ import { Route, Routes, Link } from "react-router-dom";
 let Login = () => {
   return (
     <Fragment>
-      <div id="bgImg">
+      <div className="bgImg">
         <div className="formLog">
           <h3>Đăng nhập</h3>
           <div className="form-floating m>b-3" id="">

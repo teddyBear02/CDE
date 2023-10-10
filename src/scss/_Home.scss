@@ -28,26 +28,25 @@
 }
 
 // Modal Create Project
-#cr-pj{
+.modalNew{
     width: 100%;
     height: 100%;
-    // position: absolute;
-    // transform: translate(50%, -40%);
-    // right: 50%;
-    // background-color: rgba($color: #000000, $alpha: 0.5);
+    position: absolute;
+    top: 0;
+    background-color: rgba($color: #000000, $alpha: 0.5);
     &::after,&::before{
         clear: both;
         display: table;
         content: "";
     }
     #boxModal{
-        height: 100%;
         border-radius: 4px;
         background-color: #fff;
+        padding: 24px 12px;
         width: 450px;
         height: 600px;
-        // transform: translate(50%, 10%);
-        // right: 50%;
+        transform: translate(50%, 10%);
+        right: 50%;
         position: absolute;
 
         #titleModal{
@@ -73,23 +72,22 @@
         }
         
         #modalBtn{
-            div{
-                position: absolute;
-                right: 0;
-                padding: 0 24px;
-                .btns{
-                    padding: 10px 20px;
-                    border: none;
-                    background-color: #79beff;
-                    border-radius: 4px;
-                    &:hover{
-                        opacity: 0.8;
-                        cursor: pointer;
-                    }
+            margin-left: auto;
+            width: 70%;
+            padding: 0 24px;
+            .btns{
+                margin: 0 12px;
+                padding: 10px 20px;
+                border: none;
+                background-color: #79beff;
+                border-radius: 4px;
+                &:hover{
+                    opacity: 0.8;
+                    cursor: pointer;
                 }
-                #cancel{
-                    margin-right: 12px;
-                }
+            }
+            #cancel{
+                margin-right: 12px;
             }
         }
     }

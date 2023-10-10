@@ -2,7 +2,7 @@
 let ModalCreate = () => {
   return (
     <>
-      <div className="modalNew " id="cr-pj">
+      <div className="modalNew">
         <div id="boxModal">
           <div id="titleModal">
             <h2>Dự án mới</h2>
@@ -33,14 +33,12 @@ let ModalCreate = () => {
           </div>
 
           <div id="modalBtn">
-            <div>
-              <button className="btns" id="calPj">
-                Hủy
-              </button>
-              <button className="btns" id="created">
-                Tạo mới
-              </button>
-            </div>
+            <button className="btns" id="calPj">
+              Hủy
+            </button>
+            <button className="btns" id="created">
+              Tạo mới
+            </button>
           </div>
         </div>
       </div>
