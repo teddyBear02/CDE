@@ -1,5 +1,4 @@
-@import "./_Subnav.scss";
-#main{
+.main{
     background-color: #f3f3f7;
     height: 100vh;
     position: relative;
@@ -17,7 +16,7 @@
     }
 }
 
-#toRender{
+.toRender{
     margin-top: 48px;   
 }
 

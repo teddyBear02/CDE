@@ -1,9 +1,8 @@
-import { Fragment } from "react";
-import { Route, Routes, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 let Login = () => {
   return (
-    <Fragment>
+    <>
       <div className="bgImg">
         <div className="formLog">
           <h3>Đăng nhập</h3>
@@ -28,26 +27,29 @@ let Login = () => {
 
           <div className="d-flex justify-content-between">
             <p>
-              <a className="link-opacity-100" href="#">
+              <Link
+                to={"http://localhost:5173/Register"}
+                className="link-opacity-100"
+              >
                 Đăng kí nhanh
-              </a>
+              </Link>
             </p>
             <p>
-              <a className="link-opacity-100" href="#">
+              <Link to={"/"} className="link-opacity-100">
                 Quên mật khẩu
-              </a>
+              </Link>
             </p>
           </div>
           <div className="d-grid gap-2 col-6 mx-auto" id="btn-log">
             <button className="btn btn-primary" type="button">
-              <Link to="/Home" className="link-light">
+              <Link to="http://localhost:5173/Home" className="link-light">
                 Đăng nhập
               </Link>
             </button>
           </div>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 

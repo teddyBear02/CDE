@@ -1,12 +1,12 @@
 interface Props {
-  tiltle: string;
+  title: string;
   myEvent?: any;
 }
 
-let Button = ({ tiltle, myEvent }: Props) => {
+let Button = ({ title, myEvent }: Props) => {
   return (
     <button type="button" className="btn btn-primary" onClick={myEvent}>
-      {tiltle}
+      {title}
     </button>
   );
 };

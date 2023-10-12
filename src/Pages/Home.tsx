@@ -1,8 +1,7 @@
 import Nav from "../components/Nav";
-// import SubNav from "../components/SubNab";
+import SubNav from "../components/SubNav";
 import ModalCreate from "../components/ModalCreate";
 import ListItem from "../components/ListItem";
-import Button from "../components/Button";
 import { useState } from "react";
 let MainApp = () => {
   const [showModal, setShowModal] = useState(false);
@@ -12,17 +11,10 @@ let MainApp = () => {
   };
   return (
     <>
-      <div id="main">
+      <div className="main">
         <Nav />
-        <div id="toRender" className="container">
-          <nav className="navbar navbar-expand-lg bg-body-tertiary" id="subNav">
-            <div className="container-fluid ">
-              <span className="navbar-brand">Dự án</span>
-              <span className="navbar-text">
-                <Button tiltle="New" myEvent={handleShowModal} />
-              </span>
-            </div>
-          </nav>
+        <div className="toRender container">
+          <SubNav titleNav="Dự án" titleBtn="New" event={handleShowModal} />
           <ListItem />
         </div>
       </div>
