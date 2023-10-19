@@ -1,0 +1,62 @@
+#leftNav{
+    height: 100vh;
+    width: 16%;
+    background-color: #00437b;
+    float: left;
+    padding-top: 90px;
+    .nav-item{
+        margin-bottom: 12px;
+        padding: 0.35rem 0;
+        &:hover{
+            background-color: #07599b;
+        }
+        .nav-link{
+            color: #fff;
+        }
+    }
+}
+
+#showFolder{
+    height: 100vh;
+    width: 68%;
+    float: left;
+    padding-top: 5rem;
+}
+
+#right{
+    padding-top: 5rem;
+    float: right;
+    height: 100vh;
+    width: 16%;
+    background-color: #fff;
+    position: relative;
+    #wrap{
+        height: 48px;
+        padding:0 8px 0 10px;
+        margin-bottom: 4px;
+        position: relative;
+        h4{
+            position: absolute;
+            align-items: center;
+            padding-top: 4px;
+        }
+        #exit,#edit{
+            position: absolute;
+            padding:4px 8px;
+            border-radius: 50%;
+            &:hover{
+                background-color: #c1c1c1;
+                cursor: pointer;
+            }
+        }
+        #exit{
+            right: 5%;
+        }
+        #edit{
+            right: 20%
+        }
+    }
+    hr{
+        margin: 0;
+    }
+}

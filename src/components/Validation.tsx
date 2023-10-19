@@ -33,12 +33,13 @@ let Validation = () => {
           <label htmlFor="floatingPassword">Nhập lại mật khẩu</label>
         </div>
         <div id="btnValid" className="mb-4">
-          <Button tiltle="Đăng kí" />
+          <Button title="Đăng kí" />
         </div>
 
         <div id="otherValid">
           <p>Bạn có thể đăng kí qua:</p>
           <div id="icon">
+            <i className="bi bi-google"></i>
             <i className="bi bi-facebook"></i>
             <i className="bi bi-github"></i>
           </div>

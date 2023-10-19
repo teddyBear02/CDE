@@ -3,8 +3,10 @@ import Home from "./Pages/Home";
 import Project from "./Pages/Project";
 import Register from "./Pages/Register";
 import Profile from "./Pages/Profile";
+import ForgotPass from "./Pages/ForgotPass";
+import NotFound from "./Pages/NotFound";
 import { Outlet, Route, Routes } from "react-router-dom";
-import { useState } from "react";
+// import { useState } from "react";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route path="/Project" element={<Project />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Profile" element={<Profile />} />
+        <Route path="/ForgotPass" element={<ForgotPass />} />
+        <Route path="/notfound?" element={<NotFound />} />
       </Routes>
     </>
   );

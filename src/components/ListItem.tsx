@@ -1,5 +1,9 @@
-import { Link } from "react-router-dom";
-let ListItem = () => {
+interface Props {
+  projects: [];
+  showRightBar: any;
+}
+
+let ListItem = ({ projects, showRightBar }: Props) => {
   return (
     <>
       <table className="table table-hover">
@@ -13,13 +17,15 @@ let ListItem = () => {
           </tr>
         </thead>
         <tbody className="table-group-divider">
-          <tr className="hoverList">
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>10/7/2023</td>
-            <td>10/3/2023</td>
-          </tr>
+          {projects.map((project: any, index: any) => (
+            <tr className="hoverList" key={index} onClick={showRightBar}>
+              <th scope="row">1</th>
+              <td>{project}</td>
+              <td>0 Kb</td>
+              <td>mm/dd/yyyy</td>
+              <td>mm/dd/yyyy</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>

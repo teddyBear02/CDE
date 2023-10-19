@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-
+import handleLog from "../API_Logic/loginLogic";
+import Button from "../components/Button";
 let Login = () => {
   return (
     <>
@@ -35,17 +36,16 @@ let Login = () => {
               </Link>
             </p>
             <p>
-              <Link to={"/"} className="link-opacity-100">
+              <Link
+                to={"http://localhost:5173/ForgotPass"}
+                className="link-opacity-100"
+              >
                 Quên mật khẩu
               </Link>
             </p>
           </div>
           <div className="d-grid gap-2 col-6 mx-auto" id="btn-log">
-            <button className="btn btn-primary" type="button">
-              <Link to="http://localhost:5173/Home" className="link-light">
-                Đăng nhập
-              </Link>
-            </button>
+            <Button title="Đăng nhập" myEvent={handleLog} />
           </div>
         </div>
       </div>

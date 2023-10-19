@@ -1,4 +1,7 @@
 $background_page : url('../assets/1dc2d4ac-image-1024x691.jpeg');
+body{
+    background-color: #f3f3f7;
+}
 // Background chung của Login và Register
 .bgImg{
     background: 
@@ -24,24 +27,6 @@ $background_page : url('../assets/1dc2d4ac-image-1024x691.jpeg');
 
 //.................................................//
 
-// Component LeftNav.tsx (Begin)
-
-#leftNav{
-    width: 15%;
-    padding-top: 12px;
-    background-color: #00437b;
-    height: 100vh;
-    .nav-item{
-        padding-left: 24px;
-        .nav-link{
-            color: #fff;
-        }
-    }
-}
-
-// Component LeftNav.tsx (End)
-
-//...............................................//
 
 // Page Register.tsx(Begin)
 
@@ -76,3 +61,17 @@ $background_page : url('../assets/1dc2d4ac-image-1024x691.jpeg');
 }
 
 // Page Register.tsx(End)
+
+
+//...............................................//
+
+
+// Component ListItem.tsx (Begin)
+
+.listW100{
+    width: 100%;
+    text-decoration: none;
+}
+
+// Component ListItem.tsx (End)
+

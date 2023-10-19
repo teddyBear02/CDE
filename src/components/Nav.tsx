@@ -1,11 +1,12 @@
+import { Link } from "react-router-dom";
 let Nav = () => {
   return (
     <>
       <nav id="myNav" className="navbar bg-body-tertiary">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to={"http://localhost:5173/Home"}>
             CDE - Quản lý dự án
-          </a>
+          </Link>
           <form className="d-flex" role="search">
             <input
               className="form-control me-2"
