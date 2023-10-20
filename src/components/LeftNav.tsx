@@ -5,17 +5,17 @@ let LeftNav = () => {
         <ul className="nav flex-column">
           <li className="nav-item">
             <a className="nav-link active" aria-current="page" href="#">
-              Files
+              <i className="bi bi-folder"></i> Files
             </a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">
-              Hoạt động
+              <i className="bi bi-clock-history"></i> Hoạt động
             </a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">
-              Việc cần làm
+              <i className="bi bi-clipboard-check-fill"></i> Việc cần làm
             </a>
           </li>
         </ul>

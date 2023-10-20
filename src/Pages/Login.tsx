@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import handleLog from "../API_Logic/loginLogic";
 import Button from "../components/Button";
 let Login = () => {
+  const handleLog = () => {};
+
   return (
     <>
       <div className="bgImg">

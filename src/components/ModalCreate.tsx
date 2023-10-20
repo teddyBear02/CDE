@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Button from "./Button";
-// import data from "../API_Logic/apiProject";
 
 interface Props {
   showModal: any;
@@ -39,11 +38,9 @@ let ModalCreate = ({ showModal, handleClose, handleCreateProject }: Props) => {
             />
 
             <label>Ngày bắt đầu:</label>
-
             <input type="date" />
 
             <label>Ngày kết thúc:</label>
-
             <input type="date" />
           </form>
           <div id="modalBtn">

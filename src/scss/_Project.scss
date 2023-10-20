@@ -1,9 +1,18 @@
+#wrapperProject{
+    display: flex;
+    flex-flow: row nowrap;
+    height: calc(100% - 4rem);
+    margin-top: 4rem;
+    position: absolute;
+    width: 100%;
+}
+
 #leftNav{
-    height: 100vh;
-    width: 16%;
+    height: 100%;
+    min-width: 16rem;
     background-color: #00437b;
     float: left;
-    padding-top: 90px;
+    padding-top: 2rem;
     .nav-item{
         margin-bottom: 12px;
         padding: 0.35rem 0;
@@ -16,47 +25,226 @@
     }
 }
 
-#showFolder{
-    height: 100vh;
-    width: 68%;
-    float: left;
-    padding-top: 5rem;
+#showFolder{    
+    width: calc(100% - 16rem);
+    text-align: center;
+    position: absolute;
+    padding-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    flex: 1 1 auto;
+    height: 100%;
+    overflow-y: auto;
+    padding: 0 1rem 1rem;
+    transition: .5s;
 }
 
 #right{
-    padding-top: 5rem;
-    float: right;
-    height: 100vh;
-    width: 16%;
-    background-color: #fff;
+    background: #fff;
+    box-shadow: 0 0 0.25rem #aeaeb6;
+    display: flex;
+    flex-flow: column nowrap;
+    height: 100%;
+    margin-left: auto;
+    max-width: 18rem;
+    min-height: 100%;
+    min-width: 18rem;
     position: relative;
-    #wrap{
-        height: 48px;
-        padding:0 8px 0 10px;
-        margin-bottom: 4px;
-        position: relative;
+    transition: .5s,background-color 0s;
+    
+    .header{
+        border-bottom: 0.0625rem solid #d0d0d7;
+        display: flex;
+        flex: 0 0 auto;
+        flex-flow: row nowrap;
+        padding: 1rem;
+        position: inherit;
+
         h4{
-            position: absolute;
+            
             align-items: center;
             padding-top: 4px;
-        }
-        #exit,#edit{
+            
+        }   
+        .exit,#edit{
+            align-items: center;
             position: absolute;
-            padding:4px 8px;
-            border-radius: 50%;
-            &:hover{
-                background-color: #c1c1c1;
-                cursor: pointer;
-            }
-        }
-        #exit{
+        }  
+        
+        .exit{
             right: 5%;
         }
+
         #edit{
-            right: 20%
+            right: 20%;
+        }      
+    }
+    
+    section{
+       
+        height: 100%;
+        overflow-y: auto;
+
+        .input-group{
+            display: flex;
+            flex-flow: column nowrap;
+            min-height: 5.5rem;
+            min-height: auto;
+           
+        }
+        form{
+            height: 100%;
+            label{
+                align-items: flex-end;
+                color: #6a6976;
+                display: flex;
+                flex-flow: row nowrap;
+                font-size: .75rem;
+                font-weight: 400;
+                margin-bottom: 0;
+                min-height: 1.5rem;
+            }
+            input{
+                align-items: flex-start;
+                background-color: #fff;
+                border: 0.0625rem solid #e2e2e7;
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: space-between;
+                padding: 0.5rem 0.75rem;
+                width: 100%;
+            }
+            .sub-section{
+                padding: 0 1rem 0.5rem;
+            }
         }
     }
-    hr{
-        margin: 0;
+
+    .editFooter{
+        position: relative;
+        padding: 1.5rem;
+
+        .wrap-btns{
+            position: relative;
+            left: 30%;
+            
+            .editBtns{
+                border: none;
+                margin-left: 24px;
+                padding: 0.5rem 1rem;
+                border-radius: 3px;
+            }
+
+            #editSave{
+                background-color: #005f9e;
+                color: #fff;
+                &:hover{
+                    cursor:not-allowed;
+                }
+            }
+        }
+    }
+
+
+    .btn{
+        height: 2.5rem;
+        justify-content: center;
+        align-items: center;
+        min-width: 2.5rem;
+        padding: 0;
+        display: flex;
+        border-radius: 50%;
+        &:hover{
+            background-color: #d0d0d0;
+        }
+    }
+    .body{
+        flex: 1 1 auto;
+        padding: 0 0 1rem;
+        .preview{
+            align-items: center;
+            background-color: #f9f9fb;
+            background-position: 50%;
+            background-size: cover;
+            border-bottom: 0.0625rem solid #d0d0d7;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            min-height: 6.5rem;
+            .bi{
+                font-size: 3rem;
+                vertical-align: middle;
+                width: 3rem;
+            }
+        }
+        .d-flex{
+            display: flex!important;
+        }
+
+        .mw-100{
+            max-width: 100%!important;
+        }
+
+        .pl-2{
+            padding-left: 1rem!important;
+        }
+
+        .mt-1{
+            margin-top: 0.5rem!important;
+        }
+        .mr-1{
+
+            margin-right: 0.5rem!important;
+        }
+        .section-header{
+            padding: 0 0.5rem 0 1rem;
+            align-items: center;
+            border-top: 0.0625rem solid #d0d0d7;
+            display: flex;
+            flex-flow: row nowrap;
+            margin: 0.5rem 0 0;
+            min-height: 2.5rem;
+        }
+        
+        .section-header.group{
+            align-items: center;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            
+        }
+        
+        .section-details{
+            padding: 0 1rem 0.5rem;
+        }
+        
+        .btn{
+            
+            i{
+                font-size: 24px;
+            }
+        }
+
+        .label-group{
+            justify-content: center;
+            min-height: 3rem;
+            align-content: flex-start;
+            display: flex;
+            flex-flow: column nowrap;
+            
+            position: relative;
+            label{
+                opacity: .7;
+            }
+        }  
+    }
+
+    footer{
+        background-color: #fff;
+        border-top: 0.0625rem solid #d0d0d7;
+        display: flex;
+        flex-flow: row nowrap;
+        width: 100%;
     }
 }
