@@ -26,8 +26,15 @@ let MainApp = () => {
       <div className="main">
         <Nav />
         <div className="toRender container">
-          <SubNav titleNav="Dự án" titleBtn="New" event={toggleModal} />
-          {projects.length === 0 ? <None /> : <ListItem projects={projects} />}
+          <SubNav titleNav="Dự án" titleBtn="Tạo dự án" event={toggleModal} />
+          {projects.length === 0 ? (
+            <None
+              title="Hiện tại chưa có dự án nào"
+              subTitle="Ấn nút tạo mới để tạo dự án"
+            />
+          ) : (
+            <ListItem projects={projects} />
+          )}
         </div>
       </div>
       {showModal && (

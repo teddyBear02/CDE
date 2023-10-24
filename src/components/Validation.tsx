@@ -33,7 +33,7 @@ let Validation = () => {
           <label htmlFor="floatingPassword">Nhập lại mật khẩu</label>
         </div>
         <div id="btnValid" className="mb-4">
-          <Button title="Đăng kí" />
+          <Button title="Đăng kí" subClass={"regisBtn"} />
         </div>
 
         <div id="otherValid">

@@ -52,6 +52,7 @@
         transform: translate(50%, 10%);
         right: 50%;
         position: absolute;
+        transition: ease-in 0.2s;
         #titleModal{
             h2{
                 position: relative;
@@ -63,10 +64,12 @@
                     font-size: 21px;
                     padding: 6px 8px;
                     border-radius: 50%;
+                    transition: ease-in 0.225s;  
+
                     &:hover{
                         background-color: #d7d7d7;
                         cursor: pointer;
-                        transition: ease-in 0.25s;  
+                        transition: ease-in 0.225s;  
                     }
                 }
             }

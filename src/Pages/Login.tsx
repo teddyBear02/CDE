@@ -1,7 +1,26 @@
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
+import { useRef } from "react";
+import Users from "../API_Logic/apiLogin";
+
 let Login = () => {
-  const handleLog = () => {};
+  const inputNameElem = useRef<HTMLInputElement>(null);
+  const inputPassElem = useRef<HTMLInputElement>(null);
+
+  const handleLog = () => {
+    for (let user of Users) {
+      if (
+        inputNameElem.current?.value === user.accName &&
+        inputPassElem.current?.value === user.password
+      ) {
+        break;
+      } else {
+        console.log("Sai thông tin đăng nhập");
+        alert("Sai thông tin đăng nhập");
+        break;
+      }
+    }
+  };
 
   return (
     <>
@@ -14,6 +33,7 @@ let Login = () => {
               className="form-control"
               id="floatingInput"
               placeholder="name@example.com"
+              ref={inputNameElem}
             />
             <label form="floatingInput">Tên đăng nhập</label>
           </div>
@@ -23,24 +43,19 @@ let Login = () => {
               className="form-control"
               id="floatingPassword"
               placeholder="Password"
+              ref={inputPassElem}
             />
             <label form="floatingPassword">Mật khẩu</label>
           </div>
 
           <div className="d-flex justify-content-between">
             <p>
-              <Link
-                to={"http://localhost:5173/Register"}
-                className="link-opacity-100"
-              >
+              <Link to={"/Register"} className="link-opacity-100">
                 Đăng kí nhanh
               </Link>
             </p>
             <p>
-              <Link
-                to={"http://localhost:5173/ForgotPass"}
-                className="link-opacity-100"
-              >
+              <Link to={"/ForgotPass"} className="link-opacity-100">
                 Quên mật khẩu
               </Link>
             </p>

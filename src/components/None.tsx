@@ -1,12 +1,16 @@
-let None = () => {
+interface Props {
+  title: string;
+  subTitle: string;
+}
+let None = ({ title, subTitle }: Props) => {
   return (
     <>
       <div id="project">
         <div id="descrip">
           <br />
-          <h3>Hiện tại không có dự án nào</h3>
+          <h3>{title}</h3>
           <br />
-          <p>Ấn nút tạo mới để tạo dự án</p>
+          <p>{subTitle}</p>
         </div>
       </div>
     </>

@@ -1,26 +1,20 @@
-import Login from "./Pages/Login";
-import Home from "./Pages/Home";
-import Project from "./Pages/Project";
-import Register from "./Pages/Register";
-import Profile from "./Pages/Profile";
-import ForgotPass from "./Pages/ForgotPass";
-import NotFound from "./Pages/NotFound";
-import { Outlet, Route, Routes } from "react-router-dom";
-// import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { publicRoutes } from "./routes";
 
 function App() {
   return (
-    <>
+    <Router>
       <Routes>
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Home" element={<Home />} />
-        <Route path="/Project" element={<Project />} />
-        <Route path="/Register" element={<Register />} />
-        <Route path="/Profile" element={<Profile />} />
-        <Route path="/ForgotPass" element={<ForgotPass />} />
-        <Route path="/notfound?" element={<NotFound />} />
+        {publicRoutes.map((route, index) => {
+          const Page = route.component;
+          if (route.path) {
+            return <Route key={index} path={route.path} element={<Page />} />;
+          } else if (!route.path) {
+            return <Route key={index} path={"/notfound"} element={<Page />} />;
+          }
+        })}
       </Routes>
-    </>
+    </Router>
   );
 }
 

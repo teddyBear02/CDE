@@ -4,7 +4,7 @@ let Nav = () => {
     <>
       <nav id="myNav" className="navbar bg-body-tertiary">
         <div className="container-fluid">
-          <Link className="navbar-brand" to={"http://localhost:5173/Home"}>
+          <Link className="navbar-brand" to={"/home"}>
             CDE - Quản lý dự án
           </Link>
           <form className="d-flex" role="search">
