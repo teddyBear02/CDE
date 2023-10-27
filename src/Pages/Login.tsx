@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import { useRef } from "react";
 import Users from "../API_Logic/apiLogin";
@@ -6,6 +6,7 @@ import Users from "../API_Logic/apiLogin";
 let Login = () => {
   const inputNameElem = useRef<HTMLInputElement>(null);
   const inputPassElem = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   const handleLog = () => {
     for (let user of Users) {
@@ -13,6 +14,7 @@ let Login = () => {
         inputNameElem.current?.value === user.accName &&
         inputPassElem.current?.value === user.password
       ) {
+        navigate("/home");
         break;
       } else {
         console.log("Sai thông tin đăng nhập");

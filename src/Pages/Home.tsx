@@ -4,6 +4,8 @@ import ModalCreate from "../components/ModalCreate";
 import ListItem from "../components/ListItem";
 import None from "../components/None";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 let MainApp = () => {
   const [projects, setProjects]: any = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -17,10 +19,12 @@ let MainApp = () => {
   const toggleModal = () => {
     setShowModal(!showModal);
   };
-  let a = 1;
-  console.log(a == 1 ? false : true);
-  console.log(projects);
-
+  const navigate = useNavigate();
+  const toProject = () => {
+    if (true) {
+      navigate("/project");
+    }
+  };
   return (
     <>
       <div className="main">
@@ -33,7 +37,7 @@ let MainApp = () => {
               subTitle="Ấn nút tạo mới để tạo dự án"
             />
           ) : (
-            <ListItem projects={projects} />
+            <ListItem projects={projects} showRightBar={toProject} />
           )}
         </div>
       </div>

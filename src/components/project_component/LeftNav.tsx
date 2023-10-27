@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import routesProject from "./routesProject";
 
 let LeftNav = () => {
   const sidePages = ["Dữ liệu", "Hoạt động", "Việc cần làm", "Đội nhóm"];
-  const sidePaths = ["", "activity", "todo", "team"];
+
   const [type, setType] = useState(sidePages[0]);
 
   return (
