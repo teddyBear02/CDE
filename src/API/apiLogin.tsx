@@ -17,7 +17,7 @@ let Users = [
     name: "Nguyen Ngoc Son 2",
     id: 3,
     accName: "admin2",
-    password: "Anhemminh123!",
+    password: "Anhemminh123",
   },
 
   {

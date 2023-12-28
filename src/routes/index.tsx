@@ -1,10 +1,10 @@
-import Login from "../Pages/Login";
-import Home from "../Pages/Home";
-import Project from "../Pages/Project";
-import Register from "../Pages/Register";
-import Profile from "../Pages/Profile";
-import ForgotPass from "../Pages/ForgotPass";
-import NotFound from "../Pages/NotFound";
+import Login from "../pages/Login";
+import Home from "../pages/Home";
+import Project from "../pages/Project";
+import Register from "../pages/Register";
+import Profile from "../pages/Profile";
+import ForgotPass from "../pages/ForgotPass";
+import NotFound from "../pages/NotFound";
 
 // Public Routes
 let publicRoutes = [

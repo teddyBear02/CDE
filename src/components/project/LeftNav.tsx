@@ -2,48 +2,40 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 let LeftNav = () => {
-  const sidePages = ["Dữ liệu", "Hoạt động", "Việc cần làm", "Đội nhóm"];
-
-  const [type, setType] = useState(sidePages[0]);
-
   return (
     <>
       <div id="leftNav">
         <ul className="nav flex-column">
-          {sidePages.map((sPage, index) => {
-            let iconBar;
-            let path;
-            if (index === 0) {
-              iconBar = <i className="bi bi-folder-fill"></i>;
-              path = "";
-            } else if (index === 1) {
-              iconBar = <i className="bi bi-clock-history"></i>;
-              path = "activity";
-            } else if (index === 2) {
-              iconBar = <i className="bi bi-clipboard-check-fill"></i>;
-              path = "todo";
-            } else if (index === 3) {
-              iconBar = <i className="bi bi-people-fill"></i>;
-              path = "team";
-            }
-
-            return (
-              <Link
-                className="nav-item"
-                key={sPage}
-                onClick={() => {
-                  setType(sPage);
-                }}
-                style={type === sPage ? { backgroundColor: "#0c77be" } : {}}
-                to={`/project/${path}`}
-              >
-                <a className="nav-link ">
-                  {iconBar}
-                  {sPage}
-                </a>
-              </Link>
-            );
-          })}
+          <li className="nav-item">
+            <i className="bi bi-folder-fill"></i> Dữ liệu
+          </li>
+          <li className="nav-item">
+            <i className="bi bi-clock-history"></i> Hoạt động
+          </li>
+          <li className="nav-item">
+            <i className="bi bi-clipboard-check-fill"></i> Việc cần làm
+          </li>
+          <li className="nav-item">
+            <i className="bi bi-people-fill"></i> Đội nhóm
+          </li>
+          <li className="nav-item" id="setting">
+            <i className="bi bi-gear-fill"></i> {"Cài đặt"}
+            <i className="bi bi-caret-down-fill"></i>
+            <ul className="subSetting">
+              <li>
+                <i className="bi bi-body-text"></i>
+                Chi tiết dự án
+              </li>
+              <li>
+                <i className="bi bi-tags-fill"></i>
+                Thẻ
+              </li>
+              <li>
+                <i className="bi bi-key-fill"></i>
+                Quyền cấp phép
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
     </>

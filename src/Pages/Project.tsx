@@ -4,6 +4,7 @@ import ListProject from "../components/project/ListProject";
 import Activity from "../components/project/Activity";
 import Todo from "../components/project/Todo";
 import Team from "../components/project/Team";
+import Tags from "../components/project/setting/Tags";
 import { Route, Routes } from "react-router-dom";
 
 let Project = () => {
@@ -17,6 +18,7 @@ let Project = () => {
           <Route path="/activity" element={<Activity />} />
           <Route path="/todo" element={<Todo />} />
           <Route path="/team" element={<Team />} />
+          <Route path="/setting/tags" element={<Tags />} />
         </Routes>
       </div>
     </>

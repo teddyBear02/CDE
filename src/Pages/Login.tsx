@@ -1,32 +1,46 @@
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
-import { useRef } from "react";
-import Users from "../API/apiLogin";
+import { useState } from "react";
 
 let Login = () => {
-  const inputNameElem = useRef<HTMLInputElement>(null);
-  const inputPassElem = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  let isAuthorized = false;
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-  const handleLog = () => {
-    for (let user of Users) {
-      if (
-        inputNameElem.current?.value === user.accName &&
-        inputPassElem.current?.value === user.password
-      ) {
-        isAuthorized = true;
-        break;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleLogin = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Login successful");
+        localStorage.setItem("userData", data.metadata.token);
+        navigate("/home");
+        // Thực hiện các hành động sau khi đăng nhập thành công (chuyển hướng, lưu token, v.v.).
+      } else {
+        const errorData = await response.json();
+        console.error("Login failed:", errorData);
+        alert("Thông tin đăng nhập không chính xác");
+        // Xử lý lỗi (hiển thị thông báo lỗi, v.v.).
       }
-    }
-
-    if (isAuthorized) {
-      navigate("/home");
-      console.log("User đã được xác thực");
-    } else {
-      alert("Sai thông tin đăng nhập");
+    } catch (error) {
+      console.error("Error during login:", error);
     }
   };
+
   return (
     <>
       <div className="bgImg">
@@ -38,7 +52,8 @@ let Login = () => {
               className="form-control"
               id="floatingInput"
               placeholder="name@example.com"
-              ref={inputNameElem}
+              name="email"
+              onChange={handleInputChange}
             />
             <label form="floatingInput">Tên đăng nhập</label>
           </div>
@@ -48,7 +63,8 @@ let Login = () => {
               className="form-control"
               id="floatingPassword"
               placeholder="Password"
-              ref={inputPassElem}
+              name="password"
+              onChange={handleInputChange}
             />
             <label form="floatingPassword">Mật khẩu</label>
           </div>
@@ -66,7 +82,7 @@ let Login = () => {
             </p>
           </div>
           <div className="d-grid gap-2 col-6 mx-auto" id="btn-log">
-            <Button title="Đăng nhập" myEvent={handleLog} />
+            <Button title="Đăng nhập" myEvent={handleLogin} />
           </div>
         </div>
       </div>
