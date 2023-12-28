@@ -2,30 +2,43 @@ import { useState, useEffect } from "react";
 import SubNav from "../../SubNav";
 import NoTags from "./NoTags";
 import TagsEdit from "./TagsEdit";
+import TagsDelete from "./TagsDelete";
 
 interface Tag {
-  id:number
+  id: number;
   TagName: string;
 }
 
 let Tags = () => {
-  let token = localStorage.getItem("userData");
+  let token = localStorage.getItem("userData"); // Lấy Token Login từ Local Storage
 
   const [showModal, setShowModal] = useState(false);
 
-  const toggleModal = () => {
+  let [showModalDelete, setshowModalDelete] = useState(false);
+
+  const [tags, setTags] = useState<Tag[]>([]); // Lưu thông tin nhiều tag : [{}]
+
+  const [inforTag, setinforTag] = useState({}); // Lưu thông tin metadata của 1 tag : {}
+
+  const [selectedItemId, setSelectedItemId] = useState<string>("");
+
+  const toggleModal = (e: React.MouseEvent<HTMLElement>) => {
     setShowModal(!showModal);
+    let tagId = (e.currentTarget.closest(".row") as HTMLElement)?.id;
+    setSelectedItemId(tagId);
   };
 
-  const [tagNames, setTagNames] = useState<Tag[]>([]);
-
-  const [tagName, setTagName] = useState<Tag[]>([]);
+  const toggleModalDelete = (e: React.MouseEvent<HTMLElement>) => {
+    setshowModalDelete(!showModalDelete);
+    let tagId = (e.currentTarget.closest(".row") as HTMLElement)?.id;
+    setSelectedItemId(tagId);
+  };
 
   //......................... xử lý post 1 tag mới................................//
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setTagName({ ...tagName, [name]: value });
+    setinforTag({ ...inforTag, [name]: value });
   };
 
   const handleAdd = async () => {
@@ -36,15 +49,14 @@ let Tags = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(tagName),
+        body: JSON.stringify(inforTag),
       });
 
       if (response.ok) {
         const data = await response.json();
-        let tagName: string = data.metadata.TagName;
-        let tagId: number = data.metadata.id;
+        let dataTag = data.metadata;
         console.log("Add new tag successful:", data);
-        setTagNames((prev: any) => [...prev, tagName]);
+        setTags((prev: any) => [...prev, dataTag]);
       } else {
         const errorData = await response.json();
         console.error("Add new tag failed:", errorData);
@@ -55,35 +67,36 @@ let Tags = () => {
   };
 
   useEffect(() => {
-    // useEffect này sẽ chạy mỗi khi tagNames thay đổi
-    console.log("Tag names changed:", tagNames);
-  }, [tagNames]);
+    // useEffect này sẽ chạy mỗi khi tags thay đổi
+    console.log("Tag names changed:", tags);
+  }, [tags]);
 
   //..............................................................................//
-  
 
   //............................. xử lý Update 1 tag..............................//
 
-  let tagId:number 
-
   const [selectedTag, setSelectedTag] = useState({
     TagName: "",
-  }); // Thêm state để lưu trữ thẻ đang được chọn
+  });
 
-  const handleEditClick = () => {
-    setSelectedTag(selectedTag);
+  const handleEditClick = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setSelectedTag({ ...selectedTag, [name]: value });
   };
 
   const handleEditTags = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/tag/${tagId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(selectedTag), // Chuyển đổi dữ liệu thành chuỗi JSON
-      });
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/tag/${selectedItemId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(selectedTag), // Chuyển đổi dữ liệu thành chuỗi JSON
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Không thành công");
@@ -100,6 +113,39 @@ let Tags = () => {
 
   //............................. xử lý DELETE 1 tag..............................//
 
+  const handleDeleteTags = async () => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/tag/${selectedItemId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(selectedTag), // Chuyển đổi dữ liệu thành chuỗi JSON
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Không thành công");
+      }
+      // Xử lý dữ liệu phản hồi (nếu cần)
+      const responseData = await response.json();
+      console.log("Dữ liệu phản hồi:", responseData);
+
+      const indexToRemove = tags.findIndex(
+        (item) => item.id === parseInt(selectedItemId)
+      );
+
+      if (indexToRemove !== -1) {
+        tags.splice(indexToRemove, 1);
+        showModalDelete = false;
+      }
+    } catch (error) {
+      console.error("Lỗi khi thực hiện yêu cầu PUT:", error);
+    }
+  };
   //..............................................................................//
 
   return (
@@ -141,19 +187,22 @@ let Tags = () => {
               </div>
 
               <div>
-                {tagNames.length === 0 ? (
+                {tags.length === 0 ? (
                   <NoTags />
                 ) : (
                   <ul className="listTags">
-                    {tagNames.map((item: any, index: any) => (
-                      <li className="row" key={index} id={index}>
-                        <div className="nameTag col">{item}</div>
+                    {tags.map((item) => (
+                      <li className="row" key={item.id} id={`${item.id}`}>
+                        <div className="nameTag col">{item.TagName}</div>
                         <div className="col-xl-2 actionTags">
                           <i
                             className="bi bi-pencil-fill"
                             onClick={toggleModal}
                           ></i>
-                          <i className="bi bi-x-lg"></i>
+                          <i
+                            className="bi bi-x-lg"
+                            onClick={toggleModalDelete}
+                          ></i>
                         </div>
                       </li>
                     ))}
@@ -171,6 +220,14 @@ let Tags = () => {
           handleClose={toggleModal}
           handleEditTags={handleEditTags}
           handleChangeNewTag={handleEditClick}
+        />
+      )}
+
+      {showModalDelete && (
+        <TagsDelete
+          showModal={showModalDelete}
+          handleClose={toggleModalDelete}
+          handleEditTags={handleDeleteTags}
         />
       )}
     </>

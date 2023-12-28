@@ -94,7 +94,7 @@
 
 //..............................................//
 
-//..............Model Edit Tags................//
+//..............Model Edit Tags.................//
 #modelEditTags {
   position: absolute;
   background-color: #fff;
@@ -156,3 +156,29 @@
 .showModalEditTags {
   display: block;
 }
+
+//..............................................//
+
+//................Model No Tags.................//
+
+.noTags {
+  flex-flow: column nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 14.5rem;
+  min-height: 14.5rem;
+  margin: 0 auto;
+  height: 100%;
+
+  i {
+    font-size: 32px;
+    opacity: 0.9;
+  }
+
+  p {
+    font-size: 12px;
+  }
+}
+
+//..............................................//

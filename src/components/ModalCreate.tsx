@@ -1,21 +1,17 @@
-import { useState } from "react";
 import Button from "./Button";
 
 interface Props {
   showModal: any;
   handleClose: any;
+  handleInputChange: any;
   handleCreateProject: any;
 }
-let ModalCreate = ({ showModal, handleClose, handleCreateProject }: Props) => {
-  const [projectName, setProjectName] = useState("");
-  const handleProjectNameChange = (e: any) => {
-    setProjectName(e.target.value);
-  };
-
-  const handleCreateClick = () => {
-    handleCreateProject(projectName);
-    handleClose();
-  };
+let ModalCreate = ({
+  showModal,
+  handleClose,
+  handleCreateProject,
+  handleInputChange,
+}: Props) => {
   return (
     <>
       <div className={`modalNew ${showModal ? "show" : ""}`}>
@@ -33,15 +29,15 @@ let ModalCreate = ({ showModal, handleClose, handleCreateProject }: Props) => {
             <input
               type="text"
               placeholder="Tên dự án"
-              value={projectName}
-              onChange={handleProjectNameChange}
+              name="ProjectName"
+              onChange={handleInputChange}
             />
 
             <label>Ngày bắt đầu:</label>
-            <input type="date" />
+            <input type="date" onChange={handleInputChange} name="StartDate" />
 
             <label>Ngày kết thúc:</label>
-            <input type="date" />
+            <input type="date" onChange={handleInputChange} name="FinishDate" />
           </form>
           <div id="modalBtn">
             <Button
@@ -54,7 +50,7 @@ let ModalCreate = ({ showModal, handleClose, handleCreateProject }: Props) => {
               title="Tạo mới"
               subClass={"btns"}
               idBtn={"created"}
-              myEvent={handleCreateClick}
+              myEvent={handleCreateProject}
             ></Button>
           </div>
         </div>

@@ -1,10 +1,10 @@
 interface Props {
-  projects: [];
-  showRightBar?: any;
+  project: any;
+  eventClick?: any;
   tag?: any;
 }
 
-let ListItem = ({ projects, showRightBar, tag }: Props) => {
+let ListItem = ({ project, eventClick, tag }: Props) => {
   return (
     <>
       <table className="table table-hover">
@@ -19,10 +19,10 @@ let ListItem = ({ projects, showRightBar, tag }: Props) => {
           </tr>
         </thead>
         <tbody className="table-group-divider">
-          {projects.map((project: any, index: any) => (
-            <tr className="hoverList" key={index} onClick={showRightBar}>
+          {project.map((project: any) => (
+            <tr className="hoverList" key={project.id} onClick={eventClick}>
               <th scope="row">{project.id}</th>
-              <td>{project.name}</td>
+              <td>{project.ProjectName}</td>
               <td>0 Kb</td>
               <td>mm/dd/yyyy</td>
               <td>mm/dd/yyyy</td>

@@ -46,11 +46,7 @@ let ListProject = () => {
               </ul>
             </div>
           )}
-          <ListItem
-            projects={data}
-            showRightBar={handleShowOption}
-            tag={"Tags"}
-          />
+          <ListItem project={data} eventClick={handleShowOption} tag={"Tags"} />
         </div>
       </div>
       {showOption && (

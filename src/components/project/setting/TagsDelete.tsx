@@ -2,15 +2,9 @@ interface Props {
   showModal: any;
   handleClose: any;
   handleEditTags: any;
-  handleChangeNewTag: any;
 }
 
-let TagsEdit = ({
-  showModal,
-  handleClose,
-  handleEditTags,
-  handleChangeNewTag,
-}: Props) => {
+let TagsDelete = ({ showModal, handleClose, handleEditTags }: Props) => {
   return (
     <>
       <div className={`modalEditTags ${showModal ? "showModalEditTags" : ""}`}>
@@ -25,17 +19,12 @@ let TagsEdit = ({
           </div>
 
           <div className="middleModalTags">
-            <label htmlFor="">
-              <span>Tên thẻ (Phải có)</span>
-            </label>
-            <div>
-              <input
-                type="text"
-                name="TagName"
-                onChange={handleChangeNewTag}
-                id=""
-              />
-              <div></div>
+            <div className="mt-2">
+              <p>Are you sure you want to delete the tag</p>
+              <p>
+                Deleting the tag will remove it from any/all objects in the
+                project.<strong>This action cannot be undone</strong>
+              </p>
             </div>
           </div>
 
@@ -46,7 +35,7 @@ let TagsEdit = ({
                 Hủy
               </button>
               <button className="editTagsBtn" onClick={handleEditTags}>
-                Lưu
+                Xóa
               </button>
             </div>
           </div>
@@ -56,4 +45,4 @@ let TagsEdit = ({
   );
 };
 
-export default TagsEdit;
+export default TagsDelete;
