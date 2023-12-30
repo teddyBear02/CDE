@@ -13,7 +13,7 @@ let publicRoutes = [
   { path: "/forgotpass", component: ForgotPass, notfound: false },
   { path: "/notfound", component: NotFound, notfound: true },
   { path: "/home", component: Home, notfound: false },
-  { path: "/project/*", component: Project, notfound: false },
+  { path: "/project/:id/*", component: Project, notfound: false },
   { path: "/profile", component: Profile, notfound: false },
 ];
 

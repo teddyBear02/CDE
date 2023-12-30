@@ -1,7 +1,7 @@
 import SubNav from "../SubNav";
 import ListItem from "../ListItem";
-import data from "../../API/apiProject";
 import { useState } from "react";
+import data from "../../test/data";
 
 let ListProject = () => {
   const [showOption, setShowoption] = useState(false);

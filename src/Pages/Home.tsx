@@ -31,10 +31,10 @@ let MainApp = () => {
   };
   const navigate = useNavigate();
 
-  const toProject = () => {
-    if (true) {
-      navigate("/project");
-    }
+  const toProject = (e: React.MouseEvent<HTMLElement>) => {
+    let projectId = e.currentTarget.id;
+    localStorage.setItem("projectId", projectId);
+    navigate(`/project/:${projectId}/`);
   };
 
   const handleCreateProject = async () => {

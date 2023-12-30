@@ -1,5 +1,5 @@
-import ListItem from "../ListItem";
-import SubNav from "../SubNav";
+import ListItem from "../../ListItem";
+import SubNav from "../../SubNav";
 
 let Todo = () => {
   return (
@@ -32,7 +32,7 @@ let Todo = () => {
           </div>
         </div>
 
-        <ListItem projects={[]} tag={"Status"} />
+        <ListItem project={[]} tag={"Status"} />
       </div>
     </>
   );

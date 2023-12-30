@@ -1,3 +1,7 @@
+// Việc cần làm trong file này:
+// + Khi đăng kí thành công tự động chuyển hướng vào home page
+// + Clear lại hết thẻ inp
+
 import Button from "../components/Button";
 import { useState } from "react";
 
@@ -28,6 +32,7 @@ let Register = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("Registration successful:", data);
+
         // Thực hiện các hành động sau khi đăng ký thành công (chuyển hướng, hiển thị thông báo, v.v.).
       } else {
         const errorData = await response.json();

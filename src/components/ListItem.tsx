@@ -20,7 +20,12 @@ let ListItem = ({ project, eventClick, tag }: Props) => {
         </thead>
         <tbody className="table-group-divider">
           {project.map((project: any) => (
-            <tr className="hoverList" key={project.id} onClick={eventClick}>
+            <tr
+              className="hoverList"
+              key={project.id}
+              onClick={eventClick}
+              id={project.id}
+            >
               <th scope="row">{project.id}</th>
               <td>{project.ProjectName}</td>
               <td>0 Kb</td>

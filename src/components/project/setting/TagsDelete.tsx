@@ -11,7 +11,7 @@ let TagsDelete = ({ showModal, handleClose, handleEditTags }: Props) => {
         <div id="modelEditTags">
           <div className="headerModalTags row">
             <div className="col">
-              <h4 className="">Chỉnh sửa thẻ</h4>
+              <h4 className="">Xóa thẻ</h4>
             </div>
             <div className="col-2 exitModalEditTags" onClick={handleClose}>
               <i className="bi bi-x-lg "></i>
@@ -20,10 +20,11 @@ let TagsDelete = ({ showModal, handleClose, handleEditTags }: Props) => {
 
           <div className="middleModalTags">
             <div className="mt-2">
-              <p>Are you sure you want to delete the tag</p>
+              <p>Bạn có muốn xóa thẻ này ?</p>
               <p>
-                Deleting the tag will remove it from any/all objects in the
-                project.<strong>This action cannot be undone</strong>
+                Việc xóa thẻ này sẽ làm cho nó không còn ở trong bất kì công
+                việc nào trong dự án.{" "}
+                <strong>Hành động này không thể hoàn tác</strong>
               </p>
             </div>
           </div>

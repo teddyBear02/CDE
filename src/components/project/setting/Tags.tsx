@@ -3,6 +3,7 @@ import SubNav from "../../SubNav";
 import NoTags from "./NoTags";
 import TagsEdit from "./TagsEdit";
 import TagsDelete from "./TagsDelete";
+import TagsDeleteAll from "./TagsDeleteAll";
 
 interface Tag {
   id: number;
@@ -10,15 +11,23 @@ interface Tag {
 }
 
 let Tags = () => {
+  let projectId = localStorage.getItem("projectId");
+
   let token = localStorage.getItem("userData"); // Lấy Token Login từ Local Storage
 
   const [showModal, setShowModal] = useState(false);
 
-  let [showModalDelete, setshowModalDelete] = useState(false);
+  const [showModalDelete, setshowModalDelete] = useState(false);
+
+  const [showDeleteAll, setshowDeleteAll] = useState(false);
 
   const [tags, setTags] = useState<Tag[]>([]); // Lưu thông tin nhiều tag : [{}]
 
-  const [inforTag, setinforTag] = useState({}); // Lưu thông tin metadata của 1 tag : {}
+  const [inforTag, setinforTag] = useState({
+    id: "",
+    TagName: "",
+    ProjectID: projectId,
+  }); // Lưu thông tin metadata của 1 tag : {}
 
   const [selectedItemId, setSelectedItemId] = useState<string>("");
 
@@ -32,6 +41,10 @@ let Tags = () => {
     setshowModalDelete(!showModalDelete);
     let tagId = (e.currentTarget.closest(".row") as HTMLElement)?.id;
     setSelectedItemId(tagId);
+  };
+
+  const toggleModalDeleteAll = () => {
+    setshowDeleteAll(!showDeleteAll);
   };
 
   //......................... xử lý post 1 tag mới................................//
@@ -87,7 +100,7 @@ let Tags = () => {
   const handleEditTags = async () => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/tag/${selectedItemId}`,
+        `http://127.0.0.1:8000/api/tag/${selectedItemId}/${projectId}`,
         {
           method: "PUT",
           headers: {
@@ -103,9 +116,22 @@ let Tags = () => {
       }
       // Xử lý dữ liệu phản hồi (nếu cần)
       const responseData = await response.json();
+
       console.log("Dữ liệu phản hồi:", responseData);
+      let newTagName = {
+        id: responseData.metadata.id,
+        TagName: responseData.metadata.TagName,
+      };
+      const indexToRemove = tags.findIndex(
+        (item) => item.id === parseInt(selectedItemId)
+      );
+
+      if (indexToRemove !== -1) {
+        tags.splice(indexToRemove, 1, newTagName);
+        setShowModal(!showModal);
+      }
     } catch (error) {
-      console.error("Lỗi khi thực hiện yêu cầu PUT:", error);
+      console.error("Lỗi khi thực hiện update TagName:", error);
     }
   };
 
@@ -116,7 +142,7 @@ let Tags = () => {
   const handleDeleteTags = async () => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/tag/${selectedItemId}`,
+        `http://127.0.0.1:8000/api/tag/${selectedItemId}/${projectId}`,
         {
           method: "DELETE",
           headers: {
@@ -140,18 +166,54 @@ let Tags = () => {
 
       if (indexToRemove !== -1) {
         tags.splice(indexToRemove, 1);
-        showModalDelete = false;
+        setshowModalDelete(!showModalDelete);
       }
     } catch (error) {
-      console.error("Lỗi khi thực hiện yêu cầu PUT:", error);
+      console.error("Lỗi khi thực hiện yêu cầu DELETE:", error);
     }
   };
+  //..............................................................................//
+
+  //............................ xử lý DELETE all tag.............................//
+  const handleDeleteAllTags = async () => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/tag/removeAll/${projectId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Không thành công");
+      }
+      // Xử lý dữ liệu phản hồi (nếu cần)
+      const responseData = await response.json();
+      console.log("Dữ liệu phản hồi:", responseData);
+
+      setTags(tags.slice(tags.length));
+      setshowDeleteAll(!showDeleteAll);
+    } catch (error) {
+      console.error("Lỗi khi thực hiện yêu cầu DELETE:", error);
+    }
+  };
+
   //..............................................................................//
 
   return (
     <>
       <div className="container showFolder">
-        <SubNav titleNav="Thẻ" titleBtn="Extension" />
+        <SubNav
+          titleNav="Thẻ"
+          titleBtn="Extension"
+          event={toggleModalDeleteAll}
+        />
+        {showDeleteAll && <TagsDeleteAll deleteAll={handleDeleteAllTags} />}
+
         <div className="tagManager">
           <h4 id="header">Quản lý thẻ</h4>
           <div className="row">
