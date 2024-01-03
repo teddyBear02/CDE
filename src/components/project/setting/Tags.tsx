@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import SubNav from "../../SubNav";
 import NoTags from "./NoTags";
 import TagsEdit from "./TagsEdit";
 import TagsDelete from "./TagsDelete";
 import TagsDeleteAll from "./TagsDeleteAll";
+import tagSevice from "../../../service/apiTags";
 
 interface Tag {
   id: number;
@@ -11,29 +12,27 @@ interface Tag {
 }
 
 let Tags = () => {
-  let projectId = localStorage.getItem("projectId");
+  let projectId = localStorage.getItem("projectId"); //Lấy ID của dự án từ Local Storage
 
   let token = localStorage.getItem("userData"); // Lấy Token Login từ Local Storage
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModalEdit, setShowModalEdit] = useState(false);
 
   const [showModalDelete, setshowModalDelete] = useState(false);
 
   const [showDeleteAll, setshowDeleteAll] = useState(false);
 
-  const [tags, setTags] = useState<Tag[]>([]); // Lưu thông tin nhiều tag : [{}]
-
-  const [inforTag, setinforTag] = useState({
-    id: "",
-    TagName: "",
-    ProjectID: projectId,
-  }); // Lưu thông tin metadata của 1 tag : {}
-
   const [selectedItemId, setSelectedItemId] = useState<string>("");
 
+  const [currTag, setCurrTag] = useState(""); // Default value tag
+
+  const inpRef = useRef();
+
   const toggleModal = (e: React.MouseEvent<HTMLElement>) => {
-    setShowModal(!showModal);
+    setShowModalEdit(!showModalEdit);
     let tagId = (e.currentTarget.closest(".row") as HTMLElement)?.id;
+    let currValue: any = e.currentTarget?.closest(".row")?.textContent;
+    setCurrTag(currValue);
     setSelectedItemId(tagId);
   };
 
@@ -46,8 +45,39 @@ let Tags = () => {
   const toggleModalDeleteAll = () => {
     setshowDeleteAll(!showDeleteAll);
   };
+  const [tags, setTags] = useState<Tag[]>([]); // Lưu thông tin nhiều tag : [{}]
+
+  const [clear, setClear] = useState("");
+
+  let clearInp = () => {
+    setClear("");
+  };
+
+  //.......................... xử lý get all tag .................................//
+
+  // const [getTag, setGetTag]: any = useState([]);
+
+  async function getAllTag() {
+    try {
+      const tagsData = await tagSevice.getTags(token, projectId);
+      // setGetTag(tagsData);
+      setTags(tagsData);
+    } catch (error) {
+      console.error("Đã xảy ra lỗi:", error);
+    }
+  }
+
+  useEffect(() => {
+    getAllTag();
+  }, []);
 
   //......................... xử lý post 1 tag mới................................//
+
+  const [inforTag, setinforTag] = useState({
+    id: "",
+    TagName: "",
+    ProjectID: projectId,
+  }); // Lưu thông tin metadata của 1 tag : {}
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -67,9 +97,9 @@ let Tags = () => {
 
       if (response.ok) {
         const data = await response.json();
-        let dataTag = data.metadata;
-        console.log("Add new tag successful:", data);
+        let dataTag: any = data.metadata;
         setTags((prev: any) => [...prev, dataTag]);
+        console.log("Add new tag successful:", data);
       } else {
         const errorData = await response.json();
         console.error("Add new tag failed:", errorData);
@@ -78,11 +108,6 @@ let Tags = () => {
       console.error("Error during registration:", error);
     }
   };
-
-  useEffect(() => {
-    // useEffect này sẽ chạy mỗi khi tags thay đổi
-    console.log("Tag names changed:", tags);
-  }, [tags]);
 
   //..............................................................................//
 
@@ -94,6 +119,8 @@ let Tags = () => {
 
   const handleEditClick = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    let currValue: any = e.currentTarget?.closest(".row")?.textContent;
+    setCurrTag(currValue);
     setSelectedTag({ ...selectedTag, [name]: value });
   };
 
@@ -123,12 +150,12 @@ let Tags = () => {
         TagName: responseData.metadata.TagName,
       };
       const indexToRemove = tags.findIndex(
-        (item) => item.id === parseInt(selectedItemId)
+        (item: any) => item.id === parseInt(selectedItemId)
       );
 
       if (indexToRemove !== -1) {
         tags.splice(indexToRemove, 1, newTagName);
-        setShowModal(!showModal);
+        setShowModalEdit(!showModalEdit);
       }
     } catch (error) {
       console.error("Lỗi khi thực hiện update TagName:", error);
@@ -161,7 +188,7 @@ let Tags = () => {
       console.log("Dữ liệu phản hồi:", responseData);
 
       const indexToRemove = tags.findIndex(
-        (item) => item.id === parseInt(selectedItemId)
+        (item: any) => item.id === parseInt(selectedItemId)
       );
 
       if (indexToRemove !== -1) {
@@ -194,7 +221,6 @@ let Tags = () => {
       // Xử lý dữ liệu phản hồi (nếu cần)
       const responseData = await response.json();
       console.log("Dữ liệu phản hồi:", responseData);
-
       setTags(tags.slice(tags.length));
       setshowDeleteAll(!showDeleteAll);
     } catch (error) {
@@ -203,15 +229,57 @@ let Tags = () => {
   };
 
   //..............................................................................//
+  const [role, setRole]: boolean | any = useState();
+
+  useEffect(() => {
+    const getInfor = async () => {
+      try {
+        const response = await fetch(
+          `http://127.0.0.1:8000/api/checkRole/${projectId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          let dataTag = data.metadata;
+
+          if (dataTag.Role == 1) {
+            setRole(true);
+          } else {
+            setRole(false);
+          }
+        } else {
+          const errorData = await response.json();
+          console.error("Failed:", errorData);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    // Gọi hàm khi component được mount
+    getInfor();
+  }, []);
 
   return (
     <>
       <div className="container showFolder">
-        <SubNav
-          titleNav="Thẻ"
-          titleBtn="Extension"
-          event={toggleModalDeleteAll}
-        />
+        {role ? (
+          <SubNav
+            titleNav="Thẻ"
+            titleBtn="Extension"
+            event={toggleModalDeleteAll}
+          />
+        ) : (
+          <SubNav titleNav="Thẻ" disabel={!role} />
+        )}
+
         {showDeleteAll && <TagsDeleteAll deleteAll={handleDeleteAllTags} />}
 
         <div className="tagManager">
@@ -251,20 +319,34 @@ let Tags = () => {
               <div>
                 {tags.length === 0 ? (
                   <NoTags />
-                ) : (
+                ) : role ? (
                   <ul className="listTags">
-                    {tags.map((item) => (
+                    {tags.map((item: any) => (
                       <li className="row" key={item.id} id={`${item.id}`}>
                         <div className="nameTag col">{item.TagName}</div>
                         <div className="col-xl-2 actionTags">
-                          <i
-                            className="bi bi-pencil-fill"
-                            onClick={toggleModal}
-                          ></i>
-                          <i
-                            className="bi bi-x-lg"
-                            onClick={toggleModalDelete}
-                          ></i>
+                          <button onClick={toggleModal}>
+                            <i className="bi bi-pencil-fill"></i>
+                          </button>
+                          <button onClick={toggleModalDelete}>
+                            <i className="bi bi-x-lg"></i>
+                          </button>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <ul className="listTags">
+                    {tags.map((item: any) => (
+                      <li className="row" key={item.id} id={`${item.id}`}>
+                        <div className="nameTag col">{item.TagName}</div>
+                        <div className="col-xl-2 actionTags">
+                          <button className="disableEdit" disabled>
+                            <i className="bi bi-pencil-fill"></i>
+                          </button>
+                          <button className="disableEdit" disabled>
+                            <i className="bi bi-x-lg"></i>
+                          </button>
                         </div>
                       </li>
                     ))}
@@ -276,12 +358,13 @@ let Tags = () => {
         </div>
       </div>
 
-      {showModal && (
+      {showModalEdit && (
         <TagsEdit
-          showModal={showModal}
+          showModal={showModalEdit}
           handleClose={toggleModal}
           handleEditTags={handleEditTags}
           handleChangeNewTag={handleEditClick}
+          value={currTag}
         />
       )}
 

@@ -1,5 +1,5 @@
 interface Props {
-  title: string;
+  title?: string;
   myEvent?: any;
   subClass?: any;
   idBtn?: any;

@@ -67,10 +67,12 @@
         height: 3rem !important;
       }
       .actionTags {
-        i {
+        button {
           padding: 0.5rem 0.75rem;
           border-radius: 50%;
           transition: ease-in-out 0.2s;
+          border: none;
+          background-color: #fff;
           &:hover {
             background-color: #ccc;
             transition: ease-in-out 0.2s;
@@ -237,3 +239,13 @@
   }
 }
 //..............................................//
+
+//..............Tag Edit disable................//
+
+.disableEdit {
+  opacity: 0.75;
+  cursor: not-allowed !important;
+  &:hover {
+    background-color: #fff !important;
+  }
+}

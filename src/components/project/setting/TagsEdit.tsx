@@ -3,6 +3,8 @@ interface Props {
   handleClose: any;
   handleEditTags: any;
   handleChangeNewTag: any;
+  value: string;
+  inpRef?: any;
 }
 
 let TagsEdit = ({
@@ -10,6 +12,8 @@ let TagsEdit = ({
   handleClose,
   handleEditTags,
   handleChangeNewTag,
+  value,
+  inpRef,
 }: Props) => {
   return (
     <>
@@ -33,7 +37,7 @@ let TagsEdit = ({
                 type="text"
                 name="TagName"
                 onChange={handleChangeNewTag}
-                id=""
+                value={value}
               />
               <div></div>
             </div>

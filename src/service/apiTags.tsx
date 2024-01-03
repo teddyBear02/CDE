@@ -1,4 +1,31 @@
 const tagSevice = {
+  //............................... GET tag......................................//
+
+  async getTags(token: any, id: any) {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/tag/showAll/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        return data.metadata;
+      } else {
+        const errorData = await response.json();
+        console.error("Add new tag failed:", errorData);
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+    }
+  },
+
   //.............................. POST tag......................................//
 
   async handleAdd(data: any, token: any) {
@@ -14,7 +41,8 @@ const tagSevice = {
 
       if (response.ok) {
         const data = await response.json();
-        let dataTag = data.metadata;
+        // let dataTag = data.metadata;
+        console.log(data);
       } else {
         const errorData = await response.json();
         console.error("Add new tag failed:", errorData);
